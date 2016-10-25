@@ -1,0 +1,210 @@
+{
+  "Blueprints" : {
+    "stack_name" : "HDP",
+    "stack_version" : "2.5"
+  },
+  "configurations" : [
+    {
+      "knox-env" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "knox_user" : "knox",
+          "knox_master_secret": "secret"
+        }
+      }
+    },
+    {
+      "core-site" : {
+        "properties_attributes" : {
+          "final" : {
+            "fs.defaultFS" : "true"
+          }
+        },
+        "properties" : {
+          "hadoop.proxyuser.root.groups" : "*",
+          "hadoop.proxyuser.root.hosts" : "*",
+          "hadoop.proxyuser.admin.groups" : "*",
+          "hadoop.proxyuser.admin.hosts" : "*"
+        }
+      }
+    },
+    {
+      "hdfs-site" : {
+        "properties_attributes" : {
+          "final" : {
+            "dfs.webhdfs.enabled" : "true"
+          }
+        },
+        "properties" : {
+          "dfs.replication" : "3",
+          "dfs.webhdfs.enabled" : "true",
+          "dfs.namenode.http-address" : "%HOSTGROUP::host_group_1%:50070",
+          "dfs.namenode.name.dir" : "/hadoop/hdfs/namenode"
+        }
+      }
+    },    
+    {
+      "oozie-site" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "oozie.service.JPAService.jdbc.username" : "oozie",
+          "oozie.service.JPAService.jdbc.password" : "secret"
+        }
+      }
+    },
+    {
+      "ams-grafana-env" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "metrics_grafana_username" : "admin",
+          "metrics_grafana_password" : "secret"
+        }
+      }
+    },
+    {
+      "logsearch-admin-json" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "logsearch_admin_username" : "ambari_logsearch_admin",
+          "logsearch_admin_password" : "secret"
+        }
+      }
+    },
+    {
+      "hive-site": {
+        "hive.prewarm.enabled": "true",
+        "hive.prewarm.numcontainers": "2",
+        "javax.jdo.option.ConnectionUserName" : "hive",
+        "javax.jdo.option.ConnectionUserPassword" : "secret"
+      }
+    }
+  ],
+  "host_groups" : [
+    {
+      "name" : "host_group_1",
+      "cardinality" : "1",
+      "components" : [
+        { "name" : "AMBARI_SERVER"           },
+        { "name" : "HBASE_CLIENT"            },
+        { "name" : "HBASE_MASTER"            },
+        { "name" : "HCAT"                    },
+        { "name" : "HDFS_CLIENT"             },
+        { "name" : "HIVE_CLIENT"             },
+        { "name" : "INFRA_SOLR"              },
+        { "name" : "INFRA_SOLR_CLIENT"       },
+        { "name" : "KNOX_GATEWAY"            },
+        { "name" : "LOGSEARCH_LOGFEEDER"     },
+        { "name" : "MAPREDUCE2_CLIENT"       },
+        { "name" : "METRICS_GRAFANA"         },
+        { "name" : "METRICS_MONITOR"         },
+        { "name" : "NAMENODE"                },
+        { "name" : "OOZIE_CLIENT"            },
+        { "name" : "PIG"                     },
+        { "name" : "SLIDER"                  },
+        { "name" : "SPARK_CLIENT"            },
+        { "name" : "SQOOP"                   },
+        { "name" : "TEZ_CLIENT"              },
+        { "name" : "YARN_CLIENT"             },
+        { "name" : "ZEPPELIN_MASTER"         },
+        { "name" : "ZOOKEEPER_CLIENT"        },
+        { "name" : "ZOOKEEPER_SERVER"        }
+      ],
+      "configurations" : [ ]
+    },
+    {
+      "name" : "host_group_2",
+      "cardinality" : "1",
+      "components" : [    
+        { "name" : "APP_TIMELINE_SERVER"     },
+        { "name" : "DRPC_SERVER"             },
+        { "name" : "HBASE_CLIENT"            },
+        { "name" : "HCAT"                    },
+        { "name" : "HDFS_CLIENT"             },
+        { "name" : "HISTORYSERVER"           },
+        { "name" : "HIVE_CLIENT"             },
+        { "name" : "HIVE_METASTORE"          },
+        { "name" : "HIVE_SERVER"             },
+        { "name" : "INFRA_SOLR_CLIENT"       },
+        { "name" : "LIVY_SERVER"             },
+        { "name" : "LOGSEARCH_LOGFEEDER"     },
+        { "name" : "MAPREDUCE2_CLIENT"       },
+        { "name" : "METRICS_MONITOR"         },
+        { "name" : "MYSQL_SERVER"            },
+        { "name" : "NIMBUS"                  },
+        { "name" : "OOZIE_CLIENT"            },
+        { "name" : "OOZIE_SERVER"            },
+        { "name" : "PIG"                     },
+        { "name" : "RESOURCEMANAGER"         },
+        { "name" : "SECONDARY_NAMENODE"      },
+        { "name" : "SLIDER"                  },
+        { "name" : "SPARK_CLIENT"            },
+        { "name" : "SQOOP"                   },
+        { "name" : "STORM_UI_SERVER"         },
+        { "name" : "TEZ_CLIENT"              },
+        { "name" : "WEBHCAT_SERVER"          },
+        { "name" : "YARN_CLIENT"             },
+        { "name" : "ZOOKEEPER_CLIENT"        },
+        { "name" : "ZOOKEEPER_SERVER"        }
+      ],
+      "configurations" : [ ]
+    },
+    {
+      "name" : "host_group_3",
+      "cardinality" : "1",      
+      "components" : [
+        { "name" : "HBASE_CLIENT"            },
+        { "name" : "HBASE_REGIONSERVER"      },
+        { "name" : "HCAT"                    },
+        { "name" : "HDFS_CLIENT"             },
+        { "name" : "HIVE_CLIENT"             },
+        { "name" : "INFRA_SOLR_CLIENT"       },
+        { "name" : "KAFKA_BROKER"            },
+        { "name" : "LOGSEARCH_SERVER"        },        
+        { "name" : "LOGSEARCH_LOGFEEDER"     },
+        { "name" : "MAPREDUCE2_CLIENT"       },
+        { "name" : "METRICS_COLLECTOR"       },
+        { "name" : "METRICS_MONITOR"         },
+        { "name" : "NODEMANAGER"             },
+        { "name" : "OOZIE_CLIENT"            },
+        { "name" : "PIG"                     },
+        { "name" : "SLIDER"                  },
+        { "name" : "SPARK_JOBHISTORYSERVER"  },
+        { "name" : "SPARK_THRIFTSERVER"      },        
+        { "name" : "SPARK_CLIENT"            },
+        { "name" : "SQOOP"                   },
+        { "name" : "TEZ_CLIENT"              },
+        { "name" : "YARN_CLIENT"             },
+        { "name" : "ZOOKEEPER_CLIENT"        },
+        { "name" : "ZOOKEEPER_SERVER"        }
+      ],
+      "configurations" : [ ]
+    },
+    {
+      "name" : "host_group_4",
+      "cardinality" : "3",
+      "components" : [
+        { "name" : "DATANODE"                },
+        { "name" : "HBASE_CLIENT"            },
+        { "name" : "HBASE_REGIONSERVER"      },
+        { "name" : "HCAT"                    },
+        { "name" : "HDFS_CLIENT"             },
+        { "name" : "HIVE_CLIENT"             },
+        { "name" : "INFRA_SOLR_CLIENT"       },
+        { "name" : "LOGSEARCH_LOGFEEDER"     },
+        { "name" : "MAPREDUCE2_CLIENT"       },
+        { "name" : "METRICS_MONITOR"         },
+        { "name" : "NODEMANAGER"             },
+        { "name" : "OOZIE_CLIENT"            },
+        { "name" : "PIG"                     },
+        { "name" : "SLIDER"                  },
+        { "name" : "SPARK_CLIENT"            },
+        { "name" : "SQOOP"                   },
+        { "name" : "SUPERVISOR"              },
+        { "name" : "TEZ_CLIENT"              },
+        { "name" : "YARN_CLIENT"             },
+        { "name" : "ZOOKEEPER_CLIENT"        }
+      ],
+      "configurations" : [ ]
+    }
+  ]
+}

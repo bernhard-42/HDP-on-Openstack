@@ -1,0 +1,32 @@
+{
+  "blueprint" : "Demo",
+  "default_password" : "admin",
+  "host_groups" :[
+    {
+      "name" : "host_group_1", 
+      "hosts" : [         
+        { "fqdn" : "bwalter0.field.hortonworks.com" }
+      ]
+    },
+    {
+      "name" : "host_group_2", 
+      "hosts" : [         
+        { "fqdn" : "bwalter1.field.hortonworks.com" }
+      ]
+    },
+    {
+      "name" : "host_group_3", 
+      "hosts" : [         
+        { "fqdn" : "bwalter2.field.hortonworks.com" }
+      ]
+    },
+    {
+      "name" : "host_group_4", 
+      "hosts" : [         
+        { "fqdn" : "bwalter3.field.hortonworks.com" },
+        { "fqdn" : "bwalter4.field.hortonworks.com" },
+        { "fqdn" : "bwalter5.field.hortonworks.com" }
+      ]
+    }
+  ]
+}
